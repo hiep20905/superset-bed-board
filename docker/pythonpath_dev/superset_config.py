@@ -20,14 +20,34 @@
 # development environments. Also note that superset_config_docker.py is imported
 # as a final step as a means to override "defaults" configured here
 #
+from copy import deepcopy
 import logging
 import os
 import sys
 
 from celery.schedules import crontab
 from flask_caching.backends.filesystemcache import FileSystemCache
+from superset.config import (
+    TALISMAN_CONFIG as DEFAULT_TALISMAN_CONFIG,
+)
+from superset.config import (
+    TALISMAN_DEV_CONFIG as DEFAULT_TALISMAN_DEV_CONFIG,
+)
 
 logger = logging.getLogger()
+
+NOTES_API_CONNECT_SOURCES = [
+    "http://127.0.0.1:8001",
+    "http://localhost:8001",
+]
+
+TALISMAN_CONFIG = deepcopy(DEFAULT_TALISMAN_CONFIG)
+TALISMAN_DEV_CONFIG = deepcopy(DEFAULT_TALISMAN_DEV_CONFIG)
+
+for _talisman_config in (TALISMAN_CONFIG, TALISMAN_DEV_CONFIG):
+    _talisman_config["content_security_policy"]["connect-src"].extend(
+        NOTES_API_CONNECT_SOURCES,
+    )
 
 DATABASE_DIALECT = os.getenv("DATABASE_DIALECT")
 DATABASE_USER = os.getenv("DATABASE_USER")

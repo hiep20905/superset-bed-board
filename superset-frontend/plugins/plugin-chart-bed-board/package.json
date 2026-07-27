@@ -1,0 +1,40 @@
+{
+  "name": "@superset-ui/plugin-chart-bed-board",
+  "version": "0.20.3",
+  "description": "Hospital bed and inpatient status board visualization for Apache Superset",
+  "sideEffects": false,
+  "main": "lib/index.js",
+  "module": "esm/index.js",
+  "files": [
+    "esm",
+    "lib"
+  ],
+  "scripts": {
+    "build": "npm --prefix ../.. run plugins:build -- --globs plugin-chart-bed-board --globs plugin-chart-bed-board"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apache/superset.git",
+    "directory": "superset-frontend/plugins/plugin-chart-bed-board"
+  },
+  "keywords": [
+    "superset"
+  ],
+  "author": "Superset",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/apache/superset/issues"
+  },
+  "homepage": "https://github.com/apache/superset/tree/master/superset-frontend/plugins/plugin-chart-bed-board#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "peerDependencies": {
+    "@apache-superset/core": "*",
+    "@superset-ui/chart-controls": "*",
+    "@superset-ui/core": "*",
+    "@types/react": "*",
+    "react": "^18.3.0",
+    "react-dom": "^18.3.0"
+  }
+}
